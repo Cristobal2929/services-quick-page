@@ -1,0 +1,22 @@
+{
+  "title": "Servicios Profesionales",
+  "primaryColor": "#0066FF",
+  "services": [
+    {
+      "icon": "🛠️",
+      "title": "Consultoría",
+      "desc": "Asesoría estratégica para tu negocio."
+    },
+    {
+      "icon": "💡",
+      "title": "Desarrollo Web",
+      "desc": "Sitios modernos y optimizados."
+    },
+    {
+      "icon": "📈",
+      "title": "Marketing Digital",
+      "desc": "Campañas efectivas en redes sociales."
+    }
+  ],
+  "whatsapp": "34656691085"
+}

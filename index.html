@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Servicios Profesionales</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Servicios profesionales de consultoría, desarrollo web y marketing digital. Contacta vía WhatsApp con un solo clic.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://tusitio.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Servicios Profesionales">
+  <meta property="og:description" content="Consultoría, desarrollo web y marketing digital.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tusitio.com/">
+  <meta property="og:image" content="https://tusitio.com/og-image.jpg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (icons) -->
+  <script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --primary-color: #0066FF;
+      --text-dark: #333333;
+      --bg-color: #ffffff;
+      --max-width: 900px;
+    }
+
+    /* Reset & base */
+    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: var(--text-dark);
+      background: var(--bg-color);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: var(--primary-color); text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 2px; }
+
+    /* Layout */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+    header .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    header .whatsapp-btn {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .3s;
+    }
+    header .whatsapp-btn:hover,
+    header .whatsapp-btn:focus-visible { background: #0052cc; }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 3rem 0 2rem;
+    }
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: .5rem;
+    }
+    .hero p {
+      font-size: 1.125rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Services */
+    .services {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .service-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      background: #fafafa;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .service-card.visible { opacity: 1; transform: translateY(0); }
+    .service-card .icon {
+      font-size: 2rem;
+      color: var(--primary-color);
+    }
+    .service-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.25rem;
+      margin: 0;
+    }
+    .service-card p {
+      margin: .25rem 0 0;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      padding: 2rem 0;
+      text-align: center;
+      font-size: .875rem;
+      color: #777;
+    }
+    footer a { margin: 0 .5rem; }
+
+    /* Floating WhatsApp */
+    .fab-whatsapp {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      background: var(--primary-color);
+      color: #fff;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+      cursor: pointer;
+      transition: background .3s;
+      z-index: 1000;
+    }
+    .fab-whatsapp:hover,
+    .fab-whatsapp:focus-visible { background: #0052cc; }
+
+    /* Loading overlay */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      z-index: 2000;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    #loader .spinner {
+      margin-left: .75rem;
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--primary-color);
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001ms !important; transition: none !important; }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header .logo { font-size: 1.25rem; }
+      .service-card { flex-direction: column; align-items: center; text-align: center; }
+      .service-card .icon { margin-bottom: .5rem; }
+    }
+  </style>
+
+  <!-- JSON‑LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Mi Empresa",
+    "url": "https://tusitio.com/",
+    "logo": "https://tusitio.com/logo.png",
+    "description": "Consultoría, desarrollo web y marketing digital.",
+    "telephone": "+34 656 69 10 85",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Madrid",
+      "addressCountry": "ES"
+    },
+    "sameAs": [
+      "https://facebook.com/miempresa",
+      "https://instagram.com/miempresa",
+      "https://linkedin.com/company/miempresa"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">Creando<span class="spinner"></span></div>
+
+  <header class="container">
+    <div class="logo">Mi Empresa</div>
+    <button class="whatsapp-btn" aria-label="Contactar por WhatsApp" id="header-whatsapp">
+      <i class="fab fa-whatsapp"></i>
+    </button>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1 id="page-title">Servicios Profesionales</h1>
+      <p>Impulsa tu negocio con consultoría estratégica, sitios web de última generación y campañas de marketing digital que convierten.</p>
+    </section>
+
+    <section class="services" id="services-list">
+      <!-- Tarjetas de servicios se inyectan vía JS -->
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>© 2024 Mi Empresa – Todos los derechos reservados.</p>
+    <p>
+      <a href="mailto:info@miempresa.com">info@miempresa.com</a> |
+      <a href="tel:+34656691085">+34 656 69 10 85</a>
+    </p>
+    <p>
+      <a href="https://facebook.com/miempresa" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://instagram.com/miempresa" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://linkedin.com/company/miempresa" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <div class="fab-whatsapp" aria-label="WhatsApp" id="fab-whatsapp">
+    <i class="fab fa-whatsapp"></i>
+  </div>
+
+  <script>
+    // ---------- Config ----------
+    const CONFIG_URL = 'config.json';
+
+    // ---------- Helpers ----------
+    const isValidWhatsApp = (num) => /^\d{9,15}$/.test(num);
+    const buildWhatsAppLink = (num) => `https://wa.me/${num}?text=${encodeURIComponent('Hola, quiero más información')}`;
+
+    // ---------- Load Config ----------
+    async function loadConfig() {
+      try {
+        const res = await fetch(CONFIG_URL);
+        if (!res.ok) throw new Error('Config no disponible');
+        const cfg = await res.json();
+
+        // Apply title & colors
+        document.title = cfg.title || document.title;
+        document.getElementById('page-title').textContent = cfg.title || document.title;
+        if (cfg.primaryColor) {
+          document.documentElement.style.setProperty('--primary-color', cfg.primaryColor);
+        }
+
+        // Render services
+        const servicesContainer = document.getElementById('services-list');
+        cfg.services?.forEach(s => {
+          const card = document.createElement('div');
+          card.className = 'service-card';
+          card.innerHTML = `
+            <div class="icon">${s.icon || ''}</div>
+            <div>
+              <h3>${s.title}</h3>
+              <p>${s.desc}</p>
+            </div>
+          `;
+          servicesContainer.appendChild(card);
+        });
+
+        // IntersectionObserver for fade‑in
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+          });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.service-card').forEach(el => observer.observe(el));
+
+        // WhatsApp button handling
+        const whatsappNumber = cfg.whatsapp?.replace(/\D/g, '');
+        const whatsappLink = isValidWhatsApp(whatsappNumber) ? buildWhatsAppLink(whatsappNumber) : null;
+
+        const setWhatsApp = (el) => {
+          if (whatsappLink) {
+            el.addEventListener('click', () => window.open(whatsappLink, '_blank'));
+          } else {
+            console.warn('Número de WhatsApp no válido en config.json');
+            el.setAttribute('disabled', '');
+            el.style.opacity = '.5';
+            el.style.cursor = 'not-allowed';
+          }
+        };
+        setWhatsApp(document.getElementById('header-whatsapp'));
+        setWhatsApp(document.getElementById('fab-whatsapp'));
+
+      } catch (e) {
+        console.error('Error cargando config:', e);
+      }
+    }
+
+    // ---------- Loader ----------
+    window.addEventListener('load', () => {
+      // Simular 1 s de carga
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        loader.style.opacity = '0';
+        loader.style.transition = 'opacity .5s';
+        loader.addEventListener('transitionend', () => loader.remove());
+      }, 1000);
+    });
+
+    // ---------- Init ----------
+    loadConfig();
+  </script>
+</body>
+</html>
